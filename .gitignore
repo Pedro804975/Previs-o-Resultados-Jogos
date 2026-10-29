@@ -24,6 +24,10 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+backend/models/
+.env
+__pycache__/
+backend/**/__pycache__/
 MANIFEST
 
 # PyInstaller

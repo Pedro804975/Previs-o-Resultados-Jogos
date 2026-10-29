@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Previsão de Resultados | Seleções</title>
+  <meta name="description" content="Projeto educacional de previsão de resultados de jogos de seleções com Elo, forma recente, rede neural e Poisson.">
+  <meta name="theme-color" content="#07130f">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Previsão de Resultados | Seleções">
+  <meta property="og:description" content="Explore o pipeline, os dados e um simulador Poisson interativo.">
+  <meta property="og:url" content="https://pedro804975.github.io/Previs-o-Resultados-Jogos/">
+  <meta property="og:image" content="https://pedro804975.github.io/Previs-o-Resultados-Jogos/assets/og.svg">
+  <link rel="canonical" href="https://pedro804975.github.io/Previs-o-Resultados-Jogos/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307130f'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23d9a441' stroke-width='4'/%3E%3Cpath d='M32 13v13m0 12v13M13 32h13m12 0h13' stroke='%2337d486' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Previsão de Resultados de Jogos","description":"Projeto educacional de modelagem de resultados de seleções.","url":"https://pedro804975.github.io/Previs-o-Resultados-Jogos/"}</script>
+  <script defer src="js/previsao.js"></script>
+  <script defer src="js/simulador.js"></script>
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#topo" aria-label="Início"><span class="brand-mark">⚽</span><span>Previsão<span class="brand-accent">.lab</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span><b class="sr-only">Abrir menu</b></button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Navegação principal">
+        <a href="#projeto">Projeto</a><a href="#pipeline">Pipeline</a><a href="#dados">Dados</a><a href="#modelo">Modelo</a><a href="#simulador">Simulador</a><a href="#validacao">Validação</a>
+        <a class="github-link" href="https://github.com/Pedro804975/Previs-o-Resultados-Jogos" target="_blank" rel="noopener noreferrer">Ver no GitHub ↗</a>
+        <button id="theme-toggle" class="icon-button" type="button" aria-label="Alternar tema">☀</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section id="topo" class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="pulse-dot"></span> Modelagem esportiva, sem caixa-preta</p>
+          <h1>Transformando <em>histórico</em> em leitura de jogo.</h1>
+          <p class="hero-lede">Um laboratório aberto para investigar como Elo, forma recente e gols esperados podem ajudar a entender partidas de seleções.</p>
+          <div class="button-row"><a class="button button-primary" href="#simulador">Testar o simulador <span>→</span></a><a class="button button-ghost" href="#pipeline">Conhecer o pipeline</a></div>
+          <p class="microcopy">Projeto educacional · Python + FastAPI + Docker</p>
+        </div>
+        <div class="hero-visual reveal" aria-label="Visualização decorativa de dados de uma partida">
+          <div class="score-card glass"><div class="score-top"><span>PRÓXIMA LEITURA</span><span class="live-pill">● DEMO</span></div><div class="teams"><strong>BRASIL</strong><span class="score">2.1 <small>×</small> 0.9</span><strong>MARROCOS</strong></div><div class="bars"><span style="width:64%">64%</span><span style="width:18%">18%</span><span style="width:18%">18%</span></div><div class="bar-labels"><span>VITÓRIA A</span><span>EMPATE</span><span>VITÓRIA B</span></div></div>
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="data-node node-one">ELO +215</div><div class="data-node node-two">POISSON</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projeto" class="section">
+      <div class="container">
+        <div class="section-heading reveal"><p class="eyebrow">01 / VISÃO GERAL</p><h2>Um experimento com método.</h2><p>O projeto saiu de uma classificação direta e evoluiu para um pipeline que estima gols, mede incerteza e evita olhar o futuro por acidente.</p></div>
+        <div class="feature-grid three reveal"><article class="info-card"><span class="card-icon">◈</span><h3>Dados antes do palpite</h3><p>906 partidas consolidadas, normalizadas e sem duplicatas para formar uma base reproduzível.</p></article><article class="info-card"><span class="card-icon">↗</span><h3>Força que se atualiza</h3><p>Elo começa com uma referência externa e é atualizado em ordem cronológica a cada jogo.</p></article><article class="info-card"><span class="card-icon">∑</span><h3>Probabilidade, não certeza</h3><p>A rede estima gols. A distribuição de Poisson transforma essa expectativa em cenários possíveis.</p></article></div>
+      </div>
+    </section>
+
+    <section id="pipeline" class="section section-tinted">
+      <div class="container"><div class="section-heading reveal"><p class="eyebrow">02 / PIPELINE</p><h2>Do placar bruto ao cenário.</h2></div>
+        <ol class="timeline">
+          <li class="timeline-item reveal"><span class="step-number">01</span><div><h3>Consolidar</h3><p>Datas, seleções e placares são limpos; duplicatas, inversões e pênaltis somados são tratados.</p></div></li>
+          <li class="timeline-item reveal"><span class="step-number">02</span><div><h3>Construir contexto</h3><p>O histórico gera forma recente, gols feitos/sofridos, descanso, volume de jogos e diferença Elo.</p></div></li>
+          <li class="timeline-item reveal"><span class="step-number">03</span><div><h3>Treinar sem vazamento</h3><p>Walk-forward cronológico testa janelas futuras sem deixar partidas de amanhã influenciarem ontem.</p></div></li>
+          <li class="timeline-item reveal"><span class="step-number">04</span><div><h3>Comunicar incerteza</h3><p>Gols esperados viram placares e probabilidades; a interface também mostra limitações e confiança.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="dados" class="section">
+      <div class="container"><div class="section-heading reveal"><p class="eyebrow">03 / DADOS</p><h2>Uma base pequena, mas legível.</h2><p>Os números abaixo vêm diretamente da base consolidada usada pelo notebook.</p></div>
+        <div class="stats-grid reveal"><div class="stat-card"><strong data-count="906">0</strong><span>partidas únicas</span></div><div class="stat-card"><strong data-count="189">0</strong><span>seleções distintas</span></div><div class="stat-card"><strong data-count="48">0</strong><span>notas Elo externas</span></div><div class="stat-card"><strong data-count="11">0</strong><span>features por jogo</span></div></div>
+        <div class="data-grid reveal"><div class="chart-card"><div class="card-heading"><h3>Distribuição de resultados</h3><span>906 jogos</span></div><div class="donut-wrap"><div class="donut" role="img" aria-label="Distribuição: 47,8% vitória do time A, 23,3% empate e 28,9% vitória do time B"></div><div class="donut-center"><strong>1X2</strong><span>resultado</span></div></div><ul class="legend"><li><i class="legend-a"></i><span>Vitória A</span><b>47,8%</b></li><li><i class="legend-e"></i><span>Empate</span><b>23,3%</b></li><li><i class="legend-b"></i><span>Vitória B</span><b>28,9%</b></li></ul></div><div class="note-panel"><p class="eyebrow">LEITURA</p><h3>Contexto é parte do dado.</h3><p>A base cobre 07/09/2023 a 27/06/2026. A coluna “Time A” não é necessariamente mando de campo; esse é um dos limites conhecidos do experimento.</p><a href="#validacao" class="text-link">Ver limitações →</a></div></div>
+      </div>
+    </section>
+
+    <section id="modelo" class="section section-tinted">
+      <div class="container"><div class="section-heading reveal"><p class="eyebrow">04 / MODELO</p><h2>A rede não escolhe o vencedor.<br><em>Ela estima o jogo.</em></h2></div>
+        <div class="model-grid"><div class="network-card reveal"><svg class="network-svg" viewBox="0 0 620 330" role="img" aria-labelledby="network-title network-desc"><title id="network-title">Diagrama da rede neural</title><desc id="network-desc">Onze entradas passam por duas camadas ocultas até duas saídas de gols esperados.</desc><g class="connections"><path d="M75 55L270 90M75 110L270 90M75 165L270 90M75 220L270 90M75 275L270 90M75 55L270 170M75 110L270 170M75 165L270 170M75 220L270 170M75 275L270 170M270 90L470 130M270 170L470 130M270 90L470 210M270 170L470 210"/></g><g class="nodes input-nodes"><circle cx="75" cy="55" r="10"/><circle cx="75" cy="110" r="10"/><circle cx="75" cy="165" r="10"/><circle cx="75" cy="220" r="10"/><circle cx="75" cy="275" r="10"/></g><g class="nodes hidden-nodes"><circle cx="270" cy="90" r="18"/><circle cx="270" cy="170" r="18"/></g><g class="nodes output-nodes"><circle cx="470" cy="130" r="25"/><circle cx="470" cy="210" r="25"/></g><g class="svg-labels"><text x="20" y="315">11 FEATURES</text><text x="235" y="245">L2 + DROPOUT</text><text x="515" y="135">GOLS A</text><text x="515" y="215">GOLS B</text></g></svg><p class="diagram-caption">Arquitetura: entrada → Dense 16 → Dense 8 → 2 saídas exponenciais.</p></div>
+          <div class="model-copy reveal"><div class="model-point"><span>01</span><div><h3>11 sinais</h3><p>Elo_dif, pontos, gols feitos, gols sofridos, jogos históricos e descanso para A e B.</p></div></div><div class="model-point"><span>02</span><div><h3>Saída positiva</h3><p>A ativação exponencial garante gols esperados não negativos, treinados com perda Poisson.</p></div></div><div class="model-point"><span>03</span><div><h3>Matriz de cenários</h3><p>Placares de 0×0 a 10×10 formam uma matriz. Abaixo, diagonal e acima somam A, empate e B.</p></div></div></div></div>
+      </div>
+    </section>
+
+    <section id="simulador" class="section simulator-section">
+      <div class="container"><div class="section-heading reveal"><p class="eyebrow">05 / LABORATÓRIO INTERATIVO</p><h2>Monte um cenário de gols.</h2><p>Altere as expectativas e observe a matemática Poisson em tempo real.</p></div>
+        <div class="live-prediction glass reveal"><div class="result-head"><div><p class="eyebrow">PREVISÃO DO PROJETO</p><h3>Consulte uma partida real</h3></div><span id="api-status" class="result-badge">CONECTANDO...</span></div><form id="prediction-form"><div class="team-select-grid"><label for="team-a">Seleção A<select id="team-a" name="team-a" required><option value="">Carregando seleções...</option></select></label><label for="team-b">Seleção B<select id="team-b" name="team-b" required><option value="">Carregando seleções...</option></select></label></div><button id="predict-button" class="button button-primary" type="submit" disabled>Gerar previsão <span>↗</span></button></form><p id="prediction-error" class="form-message" role="alert" hidden></p><div id="prediction-result" class="prediction-result" aria-live="polite" hidden><div class="prediction-summary"><span>Gols esperados</span><strong id="prediction-goals">—</strong><span>Placar mais provável</span><strong id="prediction-score">—</strong></div><div class="prob-grid"><div><strong id="prediction-win-a">—</strong><span>Vitória A</span></div><div><strong id="prediction-draw">—</strong><span>Empate</span></div><div><strong id="prediction-win-b">—</strong><span>Vitória B</span></div></div><p id="prediction-meta" class="microcopy"></p><ul id="prediction-warnings" class="prediction-warnings"></ul></div></div>
+          <form id="simulator-form" class="simulator-form glass reveal"><div class="input-grid"><label for="goals-a">Gols esperados — A<input id="goals-a" name="goals-a" type="number" min="0.05" max="9.99" step="0.1" value="2.1"></label><label for="goals-b">Gols esperados — B<input id="goals-b" name="goals-b" type="number" min="0.05" max="9.99" step="0.1" value="0.9"></label></div><button class="button button-primary" type="submit">Atualizar cenário <span>↗</span></button><p class="simulator-disclaimer">Este simulador executa apenas a conversão matemática Poisson. Ele <strong>não executa a rede neural</strong> nem conhece seleções específicas.</p></form>
+          <div id="simulator-output" class="simulator-output reveal" aria-live="polite"><div class="result-head"><div><p class="eyebrow">CENÁRIO ATUAL</p><h3><span id="result-goals">2.1 × 0.9</span> gols esperados</h3></div><span class="result-badge">POISSON</span></div><div class="prob-grid"><div><strong id="prob-a">—</strong><span>Vitória A</span></div><div><strong id="prob-draw">—</strong><span>Empate</span></div><div><strong id="prob-b">—</strong><span>Vitória B</span></div></div><div class="likely-score"><span>Placar mais provável</span><strong id="likely-score">—</strong><em id="likely-score-prob">—</em></div><div class="heatmap-wrap"><div class="card-heading"><h3>Heatmap de placares</h3><span>0×0 → 10×10</span></div><div id="heatmap" class="heatmap" role="img" aria-label="Heatmap de probabilidades por placar"></div></div><div class="top-scores"><h3>5 cenários mais prováveis</h3><ol id="top-scores-list"></ol></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="validacao" class="section section-tinted">
+      <div class="container"><div class="section-heading reveal"><p class="eyebrow">06 / VALIDAÇÃO</p><h2>Medir é parte do modelo.</h2><p>O notebook compara configurações cronologicamente e separa o que foi observado do que ainda precisa ser publicado.</p></div>
+        <div class="validation-grid reveal"><article class="validation-card"><span class="validation-label">MÉTODO</span><h3>Walk-forward</h3><p>5 janelas: treina em 50%, 60%, 70%, 80% e 90% e testa os 10% seguintes.</p><div class="mini-track"><i style="width:50%"></i><i style="width:10%"></i></div><small>Passado usado · futuro avaliado</small></article><article class="validation-card"><span class="validation-label">BASELINES</span><h3>Termômetros de referência</h3><p>“Sempre A”, média histórica e regressão logística contextualizam o desempenho da rede neural.</p><div class="metric-placeholder">Métrica publicada no notebook<span>consultar execução atual</span></div></article><article class="validation-card"><span class="validation-label">TESTE FINAL</span><h3>15% nunca vistos</h3><p>O corte final usa os últimos 15% dos jogos para uma avaliação honesta.</p><div class="metric-placeholder">[ inserir acurácia / log loss ]<span>placeholder: número não informado</span></div></article></div>
+        <div class="limitations reveal"><h3>Limitações conhecidas</h3><ul><li>906 jogos ainda são poucos para uma rede neural superar de forma consistente modelos simples.</li><li>Não há mando de campo ou tipo de competição como feature.</li><li>Escolher a maior probabilidade pode fazer o sistema raramente “cravar” empates.</li><li>Probabilidade não é garantia nem recomendação de aposta.</li></ul></div>
+      </div>
+    </section>
+
+    <section id="rodar" class="section"><div class="container"><div class="section-heading reveal"><p class="eyebrow">07 / REPRODUZA</p><h2>Como rodar o projeto.</h2><p>O notebook é a fonte de execução; o site é uma camada de visualização estática.</p></div><div class="run-grid reveal"><div class="code-card"><div class="code-top"><span>Google Colab</span><button class="copy-button" type="button" data-copy="colab-code">Copiar</button></div><pre id="colab-code"><code>1. Abra prever_jogos_v3.ipynb no Colab
+2. Envie as duas planilhas .xlsx
+3. Execute as células de cima para baixo
+4. Confira validação e previsões</code></pre></div><div class="code-card"><div class="code-top"><span>Jupyter local</span><button class="copy-button" type="button" data-copy="local-code">Copiar</button></div><pre id="local-code"><code>pip install pandas numpy scipy scikit-learn tensorflow openpyxl
+jupyter notebook prever_jogos_v3.ipynb
+# mantenha as planilhas na mesma pasta</code></pre></div></div></div></section>
+
+    <section id="sobre" class="section section-tinted"><div class="container about-grid"><div class="section-heading reveal"><p class="eyebrow">08 / SOBRE</p><h2>Ciência de dados com arquibancada.</h2><p>Este projeto nasceu para tornar escolhas de modelagem visíveis: quais sinais entram, como o futuro é isolado e onde a incerteza aparece.</p><a class="button button-ghost" href="https://github.com/Pedro804975/Previs-o-Resultados-Jogos" target="_blank" rel="noopener noreferrer">Abrir repositório ↗</a></div><aside class="legal-card reveal"><span class="card-icon">!</span><h3>Aviso importante</h3><p>Este é um projeto educacional e experimental. As previsões são estimativas estatísticas, não recomendação de aposta, aconselhamento financeiro ou garantia de resultado.</p><p class="microcopy">Dados e resultados dependem da execução do notebook e da qualidade da base.</p></aside></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="#topo"><span class="brand-mark">⚽</span><span>Previsão<span class="brand-accent">.lab</span></span></a><p>Feito para estudar o jogo, não para prometer certezas.</p><a href="#topo">Voltar ao topo ↑</a></div></footer>
+</body>
+</html>

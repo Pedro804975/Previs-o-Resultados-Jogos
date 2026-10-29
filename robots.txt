@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pedro804975.github.io/Previs-o-Resultados-Jogos/sitemap.xml

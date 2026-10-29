@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Previsão de Resultados de Jogos</title>
+  <desc id="desc">Visual esportivo-tecnológico com o texto Previsão.lab</desc>
+  <rect width="1200" height="630" fill="#07130f"/>
+  <circle cx="920" cy="315" r="220" fill="none" stroke="#244335" stroke-width="2"/>
+  <circle cx="920" cy="315" r="150" fill="none" stroke="#37d486" stroke-opacity=".35" stroke-width="3"/>
+  <path d="M920 95v440M700 315h440" stroke="#244335" stroke-width="2"/>
+  <circle cx="920" cy="315" r="42" fill="#102a20" stroke="#e5b24e" stroke-width="6"/>
+  <text x="90" y="270" fill="#f2f7f3" font-family="Arial, sans-serif" font-size="72" font-weight="700">Previsão</text>
+  <text x="90" y="350" fill="#37d486" font-family="Arial, sans-serif" font-size="72" font-weight="700">.lab</text>
+  <text x="95" y="415" fill="#a9bab0" font-family="Arial, sans-serif" font-size="25">Dados · Elo · Gols esperados · Poisson</text>
+</svg>
