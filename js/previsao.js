@@ -3,7 +3,7 @@
   var localApi = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") &&
     window.location.port !== "8080" ? "http://127.0.0.1:8000" : "/api";
   var apiBase = window.PREDICTION_API_URL || localApi;
-  var form, teamA, teamB, button, swapButton, status, error, result;
+  var form, teamA, teamB, button, status, error, result;
 
   function setMessage(message) {
     error.textContent = message;
@@ -40,8 +40,8 @@
   }
 
   function renderPrediction(data) {
-    document.getElementById("prediction-label-a").textContent = "Vitória " + data.team_a;
-    document.getElementById("prediction-label-b").textContent = "Vitória " + data.team_b;
+    window.appendTeamLabel(document.getElementById("prediction-label-a"), "", data.team_a);
+    window.appendTeamLabel(document.getElementById("prediction-label-b"), "", data.team_b);
     document.getElementById("prediction-goals").textContent =
       data.expected_goals.team_a.toFixed(1) + " × " + data.expected_goals.team_b.toFixed(1);
     document.getElementById("prediction-score").textContent =
@@ -99,25 +99,16 @@
       });
   }
 
-  function swapTeams() {
-    var value = teamA.value;
-    teamA.value = teamB.value;
-    teamB.value = value;
-    setMessage("");
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     form = document.getElementById("prediction-form");
     if (!form) return;
     teamA = document.getElementById("team-a");
     teamB = document.getElementById("team-b");
     button = document.getElementById("predict-button");
-    swapButton = document.getElementById("swap-teams");
     status = document.getElementById("api-status");
     error = document.getElementById("prediction-error");
     result = document.getElementById("prediction-result");
     form.addEventListener("submit", predict);
-    swapButton.addEventListener("click", swapTeams);
     loadTeams();
   });
 }());

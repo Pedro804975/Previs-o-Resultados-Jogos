@@ -107,14 +107,12 @@ h2{font-size:clamp(2.2rem,5vw,4rem)}
 .live-prediction select:focus{outline:2px solid var(--green);outline-offset:2px}
 .live-prediction .button{width:100%}
 .prediction-heading{font-size:1.5rem}
-.prediction-actions{display:flex;gap:12px}
-.prediction-actions .button{width:auto;flex:1}
 .form-message{padding:12px;border-left:3px solid var(--red);background:#e46d6312;color:var(--text);font-size:.85rem}
 .prediction-result{border-top:1px solid var(--line);margin-top:24px;padding-top:20px}
 .prediction-summary{display:grid;grid-template-columns:1fr auto 1fr auto;align-items:center;gap:12px;color:var(--muted);font-size:.8rem}
 .prediction-summary strong{font-size:1.4rem;color:var(--gold)}
 .prediction-bar{display:flex;height:38px;gap:3px;margin:22px 0 0;overflow:hidden;border-radius:8px;background:var(--surface-2)}
-.prediction-bar span{display:flex;min-width:2px;align-items:center;justify-content:center;transition:width .35s ease}
+.prediction-bar span{display:flex;min-width:6px;align-items:center;justify-content:center;transition:width .35s ease}
 .prediction-bar span:first-child{background:var(--green)}
 .prediction-bar span:nth-child(2){background:var(--gold)}
 .prediction-bar span:last-child{background:var(--red)}
@@ -137,10 +135,14 @@ h2{font-size:clamp(2.2rem,5vw,4rem)}
 .simulator-output{min-width:0;background:var(--surface);border:1px solid var(--line);padding:25px;border-radius:var(--radius)}
 .result-head h3{margin:5px 0;font-size:1.5rem}
 .result-badge,.validation-label{font-size:.65rem;letter-spacing:.14em;color:var(--gold);font-weight:800}
-.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 0}
-.prob-grid>div{padding:16px;background:var(--surface-2);border-radius:10px}
+.prob-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:25px 0}
+.prob-grid>div{min-height:112px;padding:14px 8px;background:var(--surface-2);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;min-width:0}
 .prob-grid strong{display:block;font-size:1.7rem;color:var(--green)}
 .prob-grid span,.likely-score span{color:var(--muted);font-size:.8rem}
+.prob-grid .prob-team{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-width:0;margin-top:5px;white-space:nowrap;font-size:clamp(.62rem,2.2vw,.8rem);line-height:1.2;overflow:hidden}
+.prob-grid .prob-outcome{margin-top:5px;font-size:.68rem;line-height:1.2}
+.team-flag{display:inline-block;flex:0 0 22px;width:22px;height:16px;margin:0;vertical-align:middle}
+.team-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .likely-score{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:18px}
 .likely-score strong{font-size:1.7rem;color:var(--gold)}
 .likely-score em{font-size:.8rem}
