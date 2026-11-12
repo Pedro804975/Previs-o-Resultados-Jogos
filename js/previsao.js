@@ -3,7 +3,11 @@
   var localApi = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") &&
     window.location.port !== "8080" ? "http://127.0.0.1:8000" : "/api";
   var apiBase = window.PREDICTION_API_URL || localApi;
+<<<<<<< Updated upstream
   var form, teamA, teamB, button, status, error, result;
+=======
+  var form, teamA, teamB, button, status, error, result, goalsHelpToggle, goalsHelp;
+>>>>>>> Stashed changes
 
   function setMessage(message) {
     error.textContent = message;
@@ -39,6 +43,11 @@
   }
 
   function renderPrediction(data) {
+<<<<<<< Updated upstream
+=======
+    window.appendTeamLabel(document.getElementById("prediction-label-a"), "", data.team_a);
+    window.appendTeamLabel(document.getElementById("prediction-label-b"), "", data.team_b);
+>>>>>>> Stashed changes
     document.getElementById("prediction-goals").textContent =
       data.expected_goals.team_a.toFixed(1) + " × " + data.expected_goals.team_b.toFixed(1);
     document.getElementById("prediction-score").textContent =
@@ -82,6 +91,15 @@
       });
   }
 
+<<<<<<< Updated upstream
+=======
+  function toggleGoalsHelp() {
+    var isOpen = goalsHelpToggle.getAttribute("aria-expanded") === "true";
+    goalsHelpToggle.setAttribute("aria-expanded", String(!isOpen));
+    goalsHelp.hidden = isOpen;
+  }
+
+>>>>>>> Stashed changes
   document.addEventListener("DOMContentLoaded", function () {
     form = document.getElementById("prediction-form");
     if (!form) return;
@@ -91,7 +109,13 @@
     status = document.getElementById("api-status");
     error = document.getElementById("prediction-error");
     result = document.getElementById("prediction-result");
+    goalsHelpToggle = document.getElementById("prediction-goals-help-toggle");
+    goalsHelp = document.getElementById("prediction-goals-help");
     form.addEventListener("submit", predict);
+<<<<<<< Updated upstream
+=======
+    goalsHelpToggle.addEventListener("click", toggleGoalsHelp);
+>>>>>>> Stashed changes
     loadTeams();
   });
 }());
