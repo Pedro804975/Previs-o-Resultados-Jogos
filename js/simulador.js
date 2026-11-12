@@ -27,12 +27,16 @@
   }
   document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("simulator-form");
+    var advanced = document.querySelector(".advanced");
     form.addEventListener("submit", function (event) { event.preventDefault(); render(); });
     form.addEventListener("click", function (event) {
       if (event.target.closest("button[type='submit']")) {
         event.preventDefault();
         render();
       }
+    });
+    advanced.addEventListener("toggle", function () {
+      if (advanced.open) window.requestAnimationFrame(render);
     });
     render();
   });

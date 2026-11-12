@@ -3,7 +3,7 @@
   var localApi = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") &&
     window.location.port !== "8080" ? "http://127.0.0.1:8000" : "/api";
   var apiBase = window.PREDICTION_API_URL || localApi;
-  var form, teamA, teamB, button, status, error, result;
+  var form, teamA, teamB, button, swapButton, status, error, result;
 
   function setMessage(message) {
     error.textContent = message;
@@ -22,10 +22,11 @@
       });
     });
     button.disabled = false;
-    status.textContent = "API ONLINE";
+    status.textContent = "Pronto";
   }
 
   function loadTeams() {
+    status.textContent = "Conectando...";
     return fetch(apiBase + "/teams", { headers: { Accept: "application/json" } })
       .then(function (response) {
         if (!response.ok) throw new Error("A API respondeu com erro " + response.status + ".");
@@ -33,12 +34,14 @@
       })
       .then(function (payload) { populateTeams(payload.teams); })
       .catch(function () {
-        status.textContent = "API OFFLINE";
-        setMessage("Não foi possível conectar à API. Inicie o Docker Compose e tente novamente.");
+        status.textContent = "Serviço indisponível, tente novamente";
+        setMessage("Não foi possível conectar ao serviço. Inicie o Docker Compose e tente novamente.");
       });
   }
 
   function renderPrediction(data) {
+    document.getElementById("prediction-label-a").textContent = "Vitória " + data.team_a;
+    document.getElementById("prediction-label-b").textContent = "Vitória " + data.team_b;
     document.getElementById("prediction-goals").textContent =
       data.expected_goals.team_a.toFixed(1) + " × " + data.expected_goals.team_b.toFixed(1);
     document.getElementById("prediction-score").textContent =
@@ -46,6 +49,9 @@
     document.getElementById("prediction-win-a").textContent = percentage(data.probabilities.win_a);
     document.getElementById("prediction-draw").textContent = percentage(data.probabilities.draw);
     document.getElementById("prediction-win-b").textContent = percentage(data.probabilities.win_b);
+    document.getElementById("prediction-bar-a").style.width = percentage(data.probabilities.win_a);
+    document.getElementById("prediction-bar-draw").style.width = percentage(data.probabilities.draw);
+    document.getElementById("prediction-bar-b").style.width = percentage(data.probabilities.win_b);
     document.getElementById("prediction-meta").textContent =
       "Modo: " + (data.model_mode === "keras" ? "rede Keras" : "baseline runtime") +
       " · " + data.model_version + " · dados até " + data.data_last_updated;
@@ -61,8 +67,16 @@
   function predict(event) {
     event.preventDefault();
     setMessage("");
+    if (!teamA.value || !teamB.value) {
+      setMessage("Escolha duas seleções para gerar uma previsão.");
+      return;
+    }
+    if (teamA.value === teamB.value) {
+      setMessage("Escolha duas seleções diferentes.");
+      return;
+    }
     button.disabled = true;
-    button.firstChild.textContent = "Consultando... ";
+    button.firstChild.nodeValue = "Calculando... ";
     fetch(apiBase + "/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -75,11 +89,21 @@
         });
       })
       .then(renderPrediction)
-      .catch(function (requestError) { setMessage(requestError.message); })
+      .catch(function (requestError) {
+        status.textContent = "Serviço indisponível, tente novamente";
+        setMessage(requestError.message);
+      })
       .finally(function () {
         button.disabled = false;
-        button.firstChild.textContent = "Gerar previsão ";
+        button.firstChild.nodeValue = "Gerar previsão ";
       });
+  }
+
+  function swapTeams() {
+    var value = teamA.value;
+    teamA.value = teamB.value;
+    teamB.value = value;
+    setMessage("");
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -88,10 +112,12 @@
     teamA = document.getElementById("team-a");
     teamB = document.getElementById("team-b");
     button = document.getElementById("predict-button");
+    swapButton = document.getElementById("swap-teams");
     status = document.getElementById("api-status");
     error = document.getElementById("prediction-error");
     result = document.getElementById("prediction-result");
     form.addEventListener("submit", predict);
+    swapButton.addEventListener("click", swapTeams);
     loadTeams();
   });
 }());
