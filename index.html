@@ -13,10 +13,8 @@
   <meta property="og:image" content="https://pedro804975.github.io/Previs-o-Resultados-Jogos/assets/og.svg">
   <link rel="canonical" href="https://pedro804975.github.io/Previs-o-Resultados-Jogos/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307130f'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23d9a441' stroke-width='4'/%3E%3Cpath d='M32 13v13m0 12v13M13 32h13m12 0h13' stroke='%2337d486' stroke-width='4'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="css/flag-icons.min.css">
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Previsão de Resultados de Jogos","description":"Projeto educacional de modelagem de resultados de seleções.","url":"https://pedro804975.github.io/Previs-o-Resultados-Jogos/"}</script>
-  <script defer src="js/selecoes.js"></script>
   <script defer src="js/previsao.js"></script>
   <script defer src="js/simulador.js"></script>
   <script defer src="js/main.js"></script>
@@ -45,38 +43,9 @@
           <div class="button-row"><a class="button button-primary" href="#simulador">Testar o simulador <span>→</span></a><a class="button button-ghost" href="#pipeline">Conhecer o pipeline</a></div>
           <p class="microcopy">Projeto educacional · Python + FastAPI + Docker</p>
         </div>
-<<<<<<< Updated upstream
         <div class="hero-visual reveal" aria-label="Visualização decorativa de dados de uma partida">
           <div class="score-card glass"><div class="score-top"><span>PRÓXIMA LEITURA</span><span class="live-pill">● DEMO</span></div><div class="teams"><strong>BRASIL</strong><span class="score">2.1 <small>×</small> 0.9</span><strong>MARROCOS</strong></div><div class="bars"><span style="width:64%">64%</span><span style="width:18%">18%</span><span style="width:18%">18%</span></div><div class="bar-labels"><span>VITÓRIA A</span><span>EMPATE</span><span>VITÓRIA B</span></div></div>
           <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="data-node node-one">ELO +215</div><div class="data-node node-two">POISSON</div>
-=======
-        <div class="hero-visual reveal">
-          <div class="live-prediction glass">
-            <div class="result-head"><div><p class="eyebrow">PREVISÃO DO PROJETO</p><h2 class="prediction-heading">Consulte uma partida real</h2></div><span id="api-status" class="result-badge">Conectando...</span></div>
-            <form id="prediction-form">
-              <div class="team-select-grid"><label for="team-a">Seleção A<select id="team-a" name="team-a" required><option value="">Carregando seleções...</option></select></label><label for="team-b">Seleção B<select id="team-b" name="team-b" required><option value="">Carregando seleções...</option></select></label></div>
-              <button id="predict-button" class="button button-primary" type="submit" disabled>Gerar previsão <span>↗</span></button>
-            </form>
-            <p id="prediction-error" class="form-message" role="alert" hidden></p>
-            <div id="prediction-result" class="prediction-result" aria-live="polite" hidden>
-              <div class="prediction-summary">
-                <div class="prediction-metric prediction-metric-average">
-                  <span class="prediction-label">Média de gols prevista <button id="prediction-goals-help-toggle" class="prediction-help-toggle" type="button" aria-label="Explicar média de gols prevista" aria-expanded="false" aria-controls="prediction-goals-help">?</button></span>
-                  <strong id="prediction-goals">—</strong>
-                  <p id="prediction-goals-help" class="prediction-help" hidden>É a média de gols que o modelo espera em muitos jogos como este. Em uma partida real o placar é sempre um número inteiro.</p>
-                </div>
-                <div class="prediction-metric prediction-metric-score">
-                  <span class="prediction-label">Placar mais provável</span>
-                  <strong id="prediction-score">—</strong>
-                </div>
-              </div>
-              <div class="prediction-bar" role="img" aria-label="Probabilidades de vitória, empate e derrota"><span id="prediction-bar-a"></span><span id="prediction-bar-draw"></span><span id="prediction-bar-b"></span></div>
-              <div class="prob-grid"><div class="prob-card"><strong id="prediction-win-a">—</strong><span id="prediction-label-a" class="prob-team">A</span><span class="prob-outcome">vitória</span></div><div class="prob-card"><strong id="prediction-draw">—</strong><span class="prob-team">Empate</span><span class="prob-outcome" aria-hidden="true">&nbsp;</span></div><div class="prob-card"><strong id="prediction-win-b">—</strong><span id="prediction-label-b" class="prob-team">B</span><span class="prob-outcome">vitória</span></div></div>
-              <p id="prediction-meta" class="microcopy"></p><ul id="prediction-warnings" class="prediction-warnings"></ul>
-              <p class="prediction-disclaimer">Estimativa estatística educacional, não é recomendação de aposta.</p>
-            </div>
-          </div>
->>>>>>> Stashed changes
         </div>
       </div>
     </section>
